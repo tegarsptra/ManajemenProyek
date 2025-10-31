@@ -1,6 +1,201 @@
- snamdbdnasbdna 
- asndmsandm,ndasm,
- asndmdasnmasndmas
- nsadmnmdasnmdas
- ayo gar
-pie iki carane
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuis Sederhana - Belajar GitHub</title>
+  <style>
+    :root{
+      --bg:#0f172a;
+      --card:#0b1220;
+      --accent:#06b6d4;
+      --text:#e6eef8;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:linear-gradient(180deg,#071022 0%, #001427 100%);
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+    .container{
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.05));
+      border-radius:12px;
+      padding:28px;
+      max-width:720px;
+      width:100%;
+      box-shadow:0 8px 30px rgba(2,6,23,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    h1{margin:0 0 6px 0; font-size:24px;text-align:center}
+    .subtitle{margin:0 0 18px 0; color:rgba(230,238,248,0.8);text-align:center}
+    ol{padding-left:18px}
+    .question{
+      background:rgba(255,255,255,0.02);
+      padding:12px;
+      border-radius:8px;
+      margin-bottom:12px;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .options{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+    label{cursor:pointer}
+    input[type="radio"]{margin-right:8px}
+    .controls{
+      display:flex;
+      gap:10px;
+      margin-top:14px;
+      margin-bottom:8px;
+      justify-content:center;
+    }
+    button{
+      background:var(--accent);
+      border:0;
+      color:#012; 
+      padding:8px 12px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:600;
+    }
+    button#showAnswersBtn{background:transparent;color:var(--accent);border:1px solid rgba(6,182,212,0.14)}
+    button#resetBtn{background:#1f2937;color:var(--text)}
+    .result{
+      margin-top:12px;
+      padding:10px;
+      border-radius:8px;
+      background:rgba(6,182,212,0.06);
+      color:var(--text);
+      text-align:center;
+    }
+    footer{margin-top:20px;text-align:center;color:rgba(230,238,248,0.6)}
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Kuis Sederhana</h1>
+    <p class="subtitle">Coba jawab beberapa pertanyaan di bawah ini!</p>
+
+    <form id="quizForm">
+      <ol id="questionsList"></ol>
+
+      <div class="controls">
+        <button type="button" id="checkBtn">Periksa Jawaban</button>
+        <button type="button" id="showAnswersBtn">Tampilkan Jawaban</button>
+        <button type="button" id="resetBtn">Reset</button>
+      </div>
+
+      <div id="result" class="result" aria-live="polite"></div>
+    </form>
+
+    <footer>
+      <small>Belajar GitHub dengan proyek kecil seperti ini ✨</small>
+    </footer>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        id: 1,
+        q: "Apa ibu kota Indonesia?",
+        choices: ["Bandung", "Surabaya", "Jakarta", "Medan"],
+        answerIndex: 2
+      },
+      {
+        id: 2,
+        q: "Siapa presiden pertama Indonesia?",
+        choices: ["B.J. Habibie", "Soekarno", "Soeharto", "Megawati"],
+        answerIndex: 1
+      },
+      {
+        id: 3,
+        q: "Gunung tertinggi di Indonesia adalah?",
+        choices: ["Rinjani", "Semeru", "Puncak Jaya (Carstensz)", "Kerinci"],
+        answerIndex: 2
+      },
+      {
+        id: 4,
+        q: "Bahasa resmi negara Indonesia adalah?",
+        choices: ["Sunda", "Jawa", "Indonesia", "Melayu"],
+        answerIndex: 2
+      },
+      {
+        id: 5,
+        q: "Lagu kebangsaan Indonesia adalah?",
+        choices: ["Indonesia Raya", "Tanah Airku", "Garuda Pancasila", "Bagimu Negeri"],
+        answerIndex: 0
+      }
+    ];
+
+    const questionsList = document.getElementById("questionsList");
+    const resultBox = document.getElementById("result");
+
+    function renderQuestions(){
+      questionsList.innerHTML = "";
+      questions.forEach((item, idx) => {
+        const li = document.createElement("li");
+        li.className = "question";
+        li.innerHTML = `
+          <div class="q-text"><strong>${idx+1}. ${item.q}</strong></div>
+          <div class="options" role="radiogroup" aria-labelledby="q${item.id}">
+            ${item.choices.map((c, i) => `
+              <label>
+                <input type="radio" name="q${item.id}" value="${i}" />
+                ${c}
+              </label>
+            `).join("")}
+          </div>
+        `;
+        questionsList.appendChild(li);
+      });
+    }
+
+    function checkAnswers(){
+      let correct = 0;
+      questions.forEach(q => {
+        const selected = document.querySelector(`input[name="q${q.id}"]:checked`);
+        if (selected && parseInt(selected.value,10) === q.answerIndex) correct++;
+      });
+      resultBox.textContent = `Nilai: ${correct} dari ${questions.length} (${Math.round(correct/questions.length*100)}%)`;
+    }
+
+    function showAnswers(){
+      const all = document.querySelectorAll(".question");
+      all.forEach((li, idx) => {
+        const q = questions[idx];
+        const radios = li.querySelectorAll(`input[name="q${q.id}"]`);
+        radios.forEach((r, i) => {
+          r.disabled = true;
+          if (i === q.answerIndex) {
+            r.parentElement.style.fontWeight = "700";
+            r.parentElement.style.background = "rgba(6,182,212,0.06)";
+            r.parentElement.style.padding = "6px";
+            r.parentElement.style.borderRadius = "6px";
+          }
+        });
+      });
+      resultBox.textContent = `Jawaban benar sudah ditandai!`;
+    }
+
+    function resetQuiz(){
+      document.querySelectorAll("input[type=radio]").forEach(i => {
+        i.checked = false;
+        i.disabled = false;
+        i.parentElement.style.fontWeight = "400";
+        i.parentElement.style.background = "transparent";
+        i.parentElement.style.padding = "0";
+      });
+      resultBox.textContent = "";
+    }
+
+    document.getElementById("checkBtn").addEventListener("click", checkAnswers);
+    document.getElementById("showAnswersBtn").addEventListener("click", showAnswers);
+    document.getElementById("resetBtn").addEventListener("click", resetQuiz);
+
+    renderQuestions();
+  </script>
+</body>
+</html>
