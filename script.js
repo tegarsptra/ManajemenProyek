@@ -1,6 +1,7 @@
 // ===============================
 // 📍 DATA WISATA SEMARANG
 // ===============================
+console.log("✅ Script.js berhasil dimuat!");
 const wisataList = [
   {
     nama: "Lawang Sewu",
