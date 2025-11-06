@@ -25,7 +25,7 @@ const wisataData = [
   },
   {
     id: 4,
-    nama: "Masjid Agung Jawa Tengah (MAJT)",
+    nama: "Masjid Agung Jawa Tengah",
     lokasi: "Gayamsari",
     deskripsi: "Masjid megah dengan payung otomatis seperti di Masjid Nabawi.",
     gambar: "majt.jpg"
