@@ -1,118 +1,113 @@
-// =============================
-// Data Wisata (bisa disesuaikan)
-// =============================
-const wisataList = [
+// Data wisata Semarang
+const wisataData = [
   {
+    id: 1,
     nama: "Lawang Sewu",
-    lokasi: "Jl. Pemuda, Semarang",
-    deskripsi: "Bangunan bersejarah peninggalan Belanda yang ikonik di Semarang.",
-    gambar: "lawangsewu.jpg",
-    map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.223266248832!2d110.4115790747316!3d-7.000960394948274!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708b517e0ef9f9%3A0xb0cfcbe4200fbd17!2sLawang%20Sewu!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
+    lokasi: "Jl. Pemuda No.160, Sekayu, Semarang Tengah",
+    deskripsi:
+      "Bangunan bersejarah peninggalan Belanda yang kini menjadi ikon Kota Semarang.",
+    gambar: "images/lawangsewu.jpg",
+    peta: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.738918186609!2d110.410543!3d-6.982986!2m3!1f0!2f0!3f0!"
   },
   {
-    nama: "Kota Lama",
-    lokasi: "Jl. Letjen Suprapto, Semarang",
-    deskripsi: "Kawasan bersejarah dengan bangunan Belanda klasik dan spot foto menarik.",
-    gambar: "kotalama.jpg",
-    map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.167216090874!2d110.42671307473167!3d-7.007562394943493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708b32a13291d3%3A0xe3b1817eae81bdf3!2sKota%20Lama%20Semarang!5e0!3m2!1sid!2sid!4v1700000000001!5m2!1sid!2sid"
+    id: 2,
+    nama: "Kota Lama Semarang",
+    lokasi: "Jl. Letjen Suprapto, Tanjung Mas, Semarang Utara",
+    deskripsi:
+      "Kawasan wisata bersejarah dengan bangunan klasik bergaya Eropa yang masih terjaga.",
+    gambar: "images/kotalama.jpg",
+    peta: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.809708951011!2d110.426693!3d-6.978124"
   },
   {
-    nama: "Sam Poo Kong",
-    lokasi: "Jl. Simongan, Semarang",
-    deskripsi: "Kelenteng bersejarah dengan arsitektur khas Tiongkok yang megah.",
-    gambar: "sampookong.jpg",
-    map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.242057719276!2d110.39207417473146!3d-6.998724794950203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708acb29ebef59%3A0x8ff5ebd38b2237f3!2sSam%20Poo%20Kong!5e0!3m2!1sid!2sid!4v1700000000002!5m2!1sid!2sid"
+    id: 3,
+    nama: "Klenteng Sam Poo Kong",
+    lokasi: "Jl. Simongan No.129, Bongsari, Semarang Barat",
+    deskripsi:
+      "Klenteng bersejarah yang menjadi simbol toleransi dan wisata budaya di Semarang.",
+    gambar: "images/sampookong.jpg",
+    peta: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.753082274225!2d110.392886!3d-6.981928"
   },
   {
+    id: 4,
     nama: "Masjid Agung Jawa Tengah",
-    lokasi: "Jl. Gajah Raya, Semarang",
-    deskripsi: "Masjid megah dengan arsitektur modern dan menara tinggi yang menawan.",
-    gambar: "majt.jpg",
-    map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.179694729149!2d110.44106697473152!3d-7.006078794944613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708b89a5f4f2cb%3A0xf2ecf65f2f06e1d4!2sMasjid%20Agung%20Jawa%20Tengah!5e0!3m2!1sid!2sid!4v1700000000003!5m2!1sid!2sid"
+    lokasi: "Jl. Gajah Raya, Gayamsari",
+    deskripsi:
+      "Masjid megah dengan menara tinggi dan pemandangan kota yang indah.",
+    gambar: "images/majt.jpg",
+    peta: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.870208299078!2d110.444858!3d-6.972258"
   },
   {
+    id: 5,
     nama: "Brown Canyon",
-    lokasi: "Tembalang, Semarang",
-    deskripsi: "Kawasan bekas galian yang kini menjadi spot foto alam yang unik.",
-    gambar: "browncanyon.jpg",
-    map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.973509764693!2d110.46023487473177!3d-7.02741139492793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70e96b4d7b567f%3A0x28b8337a7f187bf2!2sBrown%20Canyon!5e0!3m2!1sid!2sid!4v1700000000004!5m2!1sid!2sid"
-  }
+    lokasi: "Rowosari, Tembalang",
+    deskripsi:
+      "Tebing bekas tambang yang kini jadi spot foto alam eksotis di Semarang.",
+    gambar: "images/browncanyon.jpg",
+    peta: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.754522240178!2d110.482482!3d-7.024304"
+  },
 ];
 
-// =============================
-// Render daftar wisata di index.html
-// =============================
-function tampilkanWisata(list) {
-  const container = document.getElementById("wisataContainer");
-  if (!container) return;
-
-  container.innerHTML = "";
-
-  list.forEach((item, i) => {
+// Tampilkan daftar wisata
+const cardContainer = document.getElementById("cardContainer");
+if (cardContainer) {
+  wisataData.forEach((w) => {
     const card = document.createElement("div");
-    card.className = "card fade-in";
+    card.className = "card";
     card.innerHTML = `
-      <img src="${item.gambar}" alt="${item.nama}">
-      <h3>${item.nama}</h3>
-      <p>${item.lokasi}</p>
-      <a href="detail.html?nama=${encodeURIComponent(item.nama)}" class="btn">Lihat Detail</a>
+      <img src="${w.gambar}" alt="${w.nama}">
+      <h3>${w.nama}</h3>
+      <p>${w.lokasi}</p>
+      <a href="detail.html?id=${w.id}">Lihat Detail</a>
     `;
-    container.appendChild(card);
+    cardContainer.appendChild(card);
   });
 }
 
-// =============================
-// Fitur Pencarian Wisata
-// =============================
+// Fitur pencarian
 const searchInput = document.getElementById("searchInput");
 if (searchInput) {
-  searchInput.addEventListener("keyup", () => {
-    const keyword = searchInput.value.toLowerCase();
-    const hasil = wisataList.filter(
+  searchInput.addEventListener("input", (e) => {
+    const keyword = e.target.value.toLowerCase();
+    const filtered = wisataData.filter(
       (w) =>
         w.nama.toLowerCase().includes(keyword) ||
         w.lokasi.toLowerCase().includes(keyword)
     );
-    tampilkanWisata(hasil);
+    cardContainer.innerHTML = "";
+    filtered.forEach((w) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <img src="${w.gambar}" alt="${w.nama}">
+        <h3>${w.nama}</h3>
+        <p>${w.lokasi}</p>
+        <a href="detail.html?id=${w.id}">Lihat Detail</a>
+      `;
+      cardContainer.appendChild(card);
+    });
   });
 }
 
-// =============================
-// Fitur Rekomendasi Wisata Acak
-// =============================
-const btnAcak = document.getElementById("btnAcak");
-if (btnAcak) {
-  btnAcak.addEventListener("click", () => {
-    const randomIndex = Math.floor(Math.random() * wisataList.length);
-    const wisata = wisataList[randomIndex];
-    alert(`🎉 Rekomendasi Wisata: ${wisata.nama}\n📍 Lokasi: ${wisata.lokasi}`);
-  });
+// Rekomendasi acak
+function showRandom() {
+  const random = wisataData[Math.floor(Math.random() * wisataData.length)];
+  alert(🎲 Rekomendasi: ${random.nama}\n📍 Lokasi: ${random.lokasi});
 }
 
-// =============================
-// Halaman Detail (menampilkan data dan peta)
-// =============================
-const params = new URLSearchParams(window.location.search);
-const namaWisata = params.get("nama");
-if (namaWisata) {
-  const data = wisataList.find((w) => w.nama === namaWisata);
-  if (data) {
-    document.getElementById("detailNama").textContent = data.nama;
-    document.getElementById("detailLokasi").textContent = data.lokasi;
-    document.getElementById("detailDeskripsi").textContent = data.deskripsi;
-    document.getElementById("detailGambar").src = data.gambar;
-    document.getElementById("detailMap").src = data.map;
+// Halaman detail
+const detailContainer = document.getElementById("detailContainer");
+if (detailContainer) {
+  const params = new URLSearchParams(window.location.search);
+  const id = parseInt(params.get("id"));
+  const wisata = wisataData.find((w) => w.id === id);
+
+  if (wisata) {
+    detailContainer.innerHTML = `
+      <h2>${wisata.nama}</h2>
+      <img src="${wisata.gambar}" alt="${wisata.nama}">
+      <p><strong>Lokasi:</strong> ${wisata.lokasi}</p>
+      <p>${wisata.deskripsi}</p>
+      <iframe src="${wisata.peta}" width="100%" height="350" style="border:0;" allowfullscreen></iframe>
+    `;
   }
 }
-
-// =============================
-// Efek animasi fade-in saat muncul
-// =============================
-window.addEventListener("load", () => {
-  const cards = document.querySelectorAll(".fade-in");
-  cards.forEach((card, i) => {
-    setTimeout(() => {
-      card.classList.add("visible");
-    }, i * 150);
-  });
-});
