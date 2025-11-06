@@ -153,6 +153,15 @@ body {
   height: 350px;
 }
 
+/* MAP CONTAINER */
+.map-container {
+  margin-top: 20px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+/* FOOTER */
 footer {
   text-align: center;
   background: #0097a7;
