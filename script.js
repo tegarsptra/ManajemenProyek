@@ -1,13 +1,13 @@
-// =========================
-// 📍 Data Wisata Semarang
-// =========================
+// ===============================
+// 📍 DATA WISATA SEMARANG
+// ===============================
 const wisataList = [
   {
     nama: "Lawang Sewu",
     lokasi: "Pusat Kota Semarang",
     deskripsi: "Gedung bersejarah peninggalan Belanda yang menjadi ikon Semarang.",
     gambar: "lawangsewu.jpg",
-    maps: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.068302491584!2d110.40908407499172!3d-7.004576570660853!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708b4f6a8f1b3d%3A0x8e7ef5b15fefc6e!2sLawang%20Sewu!5e0!3m2!1sid!2sid!4v1700000000000"
+    maps: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.068302491584!2d110.40908407499172!3d-7.004576570660853"
   },
   {
     nama: "Kota Lama",
@@ -39,79 +39,87 @@ const wisataList = [
   }
 ];
 
-// =========================
-// 🏠 Halaman Utama (index.html)
-// =========================
-document.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById("cardContainer");
-  const searchInput = document.getElementById("searchInput");
+// ===============================
+// 🌆 HALAMAN UTAMA (index.html)
+// ===============================
+const container = document.getElementById("cardContainer");
 
-  // Hanya jalan di halaman utama
-  if (container) {
-    // --- Tampilkan semua wisata ---
-    function tampilkanWisata(list) {
-      container.innerHTML = "";
-      list.forEach((w) => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <img src="${w.gambar}" alt="${w.nama}">
-          <h3>${w.nama}</h3>
-          <p>${w.lokasi}</p>
-          <button onclick='lihatDetail(${JSON.stringify(w).replace(/"/g, "&quot;")})'>Lihat Detail</button>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    // --- Fitur pencarian ---
-    if (searchInput) {
-      searchInput.addEventListener("input", function () {
-        const keyword = this.value.toLowerCase();
-        const hasil = wisataList.filter(
-          (w) =>
-            w.nama.toLowerCase().includes(keyword) ||
-            w.lokasi.toLowerCase().includes(keyword)
-        );
-        tampilkanWisata(hasil);
-      });
-    }
-
-    // --- Rekomendasi acak ---
-    window.showRandom = function () {
-      const random = wisataList[Math.floor(Math.random() * wisataList.length)];
-      alert(`🎯 Rekomendasi kamu: ${random.nama}`);
-    };
-
-    // --- Pindah ke halaman detail ---
-    window.lihatDetail = function (wisata) {
-      localStorage.setItem("selectedWisata", JSON.stringify(wisata));
-      window.location.href = "detail.html";
-    };
-
-    // Jalankan awal
-    tampilkanWisata(wisataList);
-  }
-
-  // =========================
-  // 📜 Halaman Detail
-  // =========================
-  const detailContainer = document.getElementById("detailContainer");
-
-  if (detailContainer) {
-    const wisata = JSON.parse(localStorage.getItem("selectedWisata"));
-    if (wisata) {
-      detailContainer.innerHTML = `
-        <div class="detail-content">
-          <h2>${wisata.nama}</h2>
-          <img src="${wisata.gambar}" alt="${wisata.nama}" class="detail-img">
-          <p>${wisata.deskripsi}</p>
-          <h4>📍 Lokasi: ${wisata.lokasi}</h4>
-          <iframe src="${wisata.maps}" width="100%" height="300" style="border:0;" allowfullscreen></iframe>
-        </div>
+if (container) {
+  // Fungsi menampilkan daftar wisata
+  function tampilkanWisata(list) {
+    container.innerHTML = "";
+    list.forEach((w, i) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <img src="${w.gambar}" alt="${w.nama}">
+        <h3>${w.nama}</h3>
+        <p>${w.lokasi}</p>
+        <button class="detail-btn" data-index="${i}">Lihat Detail</button>
       `;
-    } else {
-      detailContainer.innerHTML = `<p style="text-align:center;">❌ Data wisata tidak ditemukan. Silakan kembali ke <a href='index.html'>halaman utama</a>.</p>`;
-    }
+      container.appendChild(card);
+    });
+
+    // Tambahkan event listener setelah elemen dibuat
+    const tombolDetail = document.querySelectorAll(".detail-btn");
+    tombolDetail.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const index = e.target.getAttribute("data-index");
+        lihatDetail(wisataList[index]);
+      });
+    });
   }
-});
+
+  // Pencarian
+  document.getElementById("searchInput").addEventListener("input", function () {
+    const keyword = this.value.toLowerCase();
+    const hasil = wisataList.filter(
+      (w) =>
+        w.nama.toLowerCase().includes(keyword) ||
+        w.lokasi.toLowerCase().includes(keyword)
+    );
+    tampilkanWisata(hasil);
+  });
+
+  // Rekomendasi acak
+  function showRandom() {
+    const random = wisataList[Math.floor(Math.random() * wisataList.length)];
+    alert(`🎯 Rekomendasi kamu: ${random.nama}`);
+  }
+  window.showRandom = showRandom;
+
+  // Pindah ke halaman detail
+  function lihatDetail(wisata) {
+    localStorage.setItem("selectedWisata", JSON.stringify(wisata));
+    window.location.href = "detail.html";
+  }
+
+  // Jalankan pertama kali
+  tampilkanWisata(wisataList);
+}
+
+// ===============================
+// 🏝️ HALAMAN DETAIL (detail.html)
+// ===============================
+const detailContainer = document.getElementById("detailContainer");
+
+if (detailContainer) {
+  const wisata = JSON.parse(localStorage.getItem("selectedWisata"));
+
+  if (wisata) {
+    detailContainer.innerHTML = `
+      <h2>${wisata.nama}</h2>
+      <img src="${wisata.gambar}" alt="${wisata.nama}" class="detail-img">
+      <p>${wisata.deskripsi}</p>
+      <h4>📍 Lokasi: ${wisata.lokasi}</h4>
+      <iframe src="${wisata.maps}" width="100%" height="300" style="border:0;" allowfullscreen></iframe>
+    `;
+  } else {
+    detailContainer.innerHTML = `
+      <p style="text-align:center; color:red;">
+        ⚠️ Data wisata tidak ditemukan.<br>
+        Silakan kembali ke <a href="index.html">halaman utama</a>.
+      </p>
+    `;
+  }
+}
