@@ -1,3 +1,5 @@
+console.log("✅ script.js berhasil dimuat!");
+
 // Data wisata
 const wisataData = [
   {
@@ -5,32 +7,32 @@ const wisataData = [
     nama: "Lawang Sewu",
     lokasi: "Pusat Kota Semarang",
     deskripsi: "Bangunan bersejarah dengan arsitektur kolonial Belanda.",
-    gambar: "img/lawangsewu.jpg"
+    gambar: "lawangsewu.jpg"
   },
   {
     id: 2,
     nama: "Kota Lama",
     lokasi: "Semarang Utara",
     deskripsi: "Kawasan heritage dengan bangunan tempo dulu.",
-    gambar: "img/kotalama.jpg"
+    gambar: "kotalama.jpg"
   },
   {
     id: 3,
     nama: "Sam Poo Kong",
     lokasi: "Gedung Batu",
     deskripsi: "Kelenteng bersejarah tempat persinggahan Laksamana Cheng Ho.",
-    gambar: "img/sampookong.jpg"
+    gambar: "sampookong.jpg"
   },
   {
     id: 4,
     nama: "Masjid Agung Jawa Tengah (MAJT)",
     lokasi: "Gayamsari",
     deskripsi: "Masjid megah dengan payung otomatis seperti di Masjid Nabawi.",
-    gambar: "img/majt.jpg"
+    gambar: "majt.jpg"
   }
 ];
 
-// Render kartu di index.html
+// Tampilkan kartu di halaman index
 const cardContainer = document.getElementById("cardContainer");
 if (cardContainer) {
   cardContainer.innerHTML = wisataData.map(w => `
@@ -41,6 +43,23 @@ if (cardContainer) {
       <button onclick="showDetail(${w.id})">Lihat Detail</button>
     </div>
   `).join('');
+
+  // Fitur pencarian
+  document.getElementById("searchInput").addEventListener("input", e => {
+    const keyword = e.target.value.toLowerCase();
+    const hasil = wisataData.filter(w => 
+      w.nama.toLowerCase().includes(keyword) || 
+      w.lokasi.toLowerCase().includes(keyword)
+    );
+    cardContainer.innerHTML = hasil.map(w => `
+      <div class="card">
+        <img src="${w.gambar}" alt="${w.nama}">
+        <h3>${w.nama}</h3>
+        <p>${w.lokasi}</p>
+        <button onclick="showDetail(${w.id})">Lihat Detail</button>
+      </div>
+    `).join('');
+  });
 }
 
 // Simpan ke localStorage dan arahkan ke detail.html
@@ -48,6 +67,12 @@ function showDetail(id) {
   const wisata = wisataData.find(w => w.id === id);
   localStorage.setItem("selectedWisata", JSON.stringify(wisata));
   window.location.href = "detail.html";
+}
+
+// Rekomendasi acak
+function showRandom() {
+  const random = wisataData[Math.floor(Math.random() * wisataData.length)];
+  alert(`🎯 Rekomendasi kamu: ${random.nama}`);
 }
 
 // Tampilkan detail di halaman detail.html
