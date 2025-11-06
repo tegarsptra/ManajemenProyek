@@ -1,113 +1,168 @@
-// Data wisata Semarang
-const wisataData = [
-  {
-    id: 1,
-    nama: "Lawang Sewu",
-    lokasi: "Jl. Pemuda No.160, Sekayu, Semarang Tengah",
-    deskripsi:
-      "Bangunan bersejarah peninggalan Belanda yang kini menjadi ikon Kota Semarang.",
-    gambar: "images/lawangsewu.jpg",
-    peta: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.738918186609!2d110.410543!3d-6.982986!2m3!1f0!2f0!3f0!"
-  },
-  {
-    id: 2,
-    nama: "Kota Lama Semarang",
-    lokasi: "Jl. Letjen Suprapto, Tanjung Mas, Semarang Utara",
-    deskripsi:
-      "Kawasan wisata bersejarah dengan bangunan klasik bergaya Eropa yang masih terjaga.",
-    gambar: "images/kotalama.jpg",
-    peta: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.809708951011!2d110.426693!3d-6.978124"
-  },
-  {
-    id: 3,
-    nama: "Klenteng Sam Poo Kong",
-    lokasi: "Jl. Simongan No.129, Bongsari, Semarang Barat",
-    deskripsi:
-      "Klenteng bersejarah yang menjadi simbol toleransi dan wisata budaya di Semarang.",
-    gambar: "images/sampookong.jpg",
-    peta: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.753082274225!2d110.392886!3d-6.981928"
-  },
-  {
-    id: 4,
-    nama: "Masjid Agung Jawa Tengah",
-    lokasi: "Jl. Gajah Raya, Gayamsari",
-    deskripsi:
-      "Masjid megah dengan menara tinggi dan pemandangan kota yang indah.",
-    gambar: "images/majt.jpg",
-    peta: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.870208299078!2d110.444858!3d-6.972258"
-  },
-  {
-    id: 5,
-    nama: "Brown Canyon",
-    lokasi: "Rowosari, Tembalang",
-    deskripsi:
-      "Tebing bekas tambang yang kini jadi spot foto alam eksotis di Semarang.",
-    gambar: "images/browncanyon.jpg",
-    peta: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.754522240178!2d110.482482!3d-7.024304"
-  },
-];
-
-// Tampilkan daftar wisata
-const cardContainer = document.getElementById("cardContainer");
-if (cardContainer) {
-  wisataData.forEach((w) => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-      <img src="${w.gambar}" alt="${w.nama}">
-      <h3>${w.nama}</h3>
-      <p>${w.lokasi}</p>
-      <a href="detail.html?id=${w.id}">Lihat Detail</a>
-    `;
-    cardContainer.appendChild(card);
-  });
+/* STYLE UMUM */
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f7fafc;
+  color: #333;
 }
 
-// Fitur pencarian
-const searchInput = document.getElementById("searchInput");
-if (searchInput) {
-  searchInput.addEventListener("input", (e) => {
-    const keyword = e.target.value.toLowerCase();
-    const filtered = wisataData.filter(
-      (w) =>
-        w.nama.toLowerCase().includes(keyword) ||
-        w.lokasi.toLowerCase().includes(keyword)
-    );
-    cardContainer.innerHTML = "";
-    filtered.forEach((w) => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `
-        <img src="${w.gambar}" alt="${w.nama}">
-        <h3>${w.nama}</h3>
-        <p>${w.lokasi}</p>
-        <a href="detail.html?id=${w.id}">Lihat Detail</a>
-      `;
-      cardContainer.appendChild(card);
-    });
-  });
+/* HEADER */
+.hero {
+  text-align: center;
+  background: linear-gradient(135deg, #0097a7, #00acc1);
+  color: white;
+  padding: 60px 20px;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
 }
 
-// Rekomendasi acak
-function showRandom() {
-  const random = wisataData[Math.floor(Math.random() * wisataData.length)];
-  alert(`🎲 Rekomendasi: ${random.nama}\n📍 Lokasi: ${random.lokasi}`);
+.hero h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5em;
 }
 
-// Halaman detail
-const detailContainer = document.getElementById("detailContainer");
-if (detailContainer) {
-  const params = new URLSearchParams(window.location.search);
-  const id = parseInt(params.get("id"));
-  const wisata = wisataData.find((w) => w.id === id);
+.hero p {
+  margin-top: 10px;
+  font-size: 1.1em;
+}
 
-  if (wisata) {
-    detailContainer.innerHTML = `
-      <h2>${wisata.nama}</h2>
-      <img src="${wisata.gambar}" alt="${wisata.nama}">
-      <p><strong>Lokasi:</strong> ${wisata.lokasi}</p>
-      <p>${wisata.deskripsi}</p>
-      <iframe src="${wisata.peta}" width="100%" height="350" style="border:0;" allowfullscreen></iframe>
-    `;
-  }
+/* SEARCH BOX */
+.search-box {
+  margin-top: 20px;
+}
+
+.search-box input {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  width: 220px;
+}
+
+.search-box button {
+  padding: 10px 15px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #006064;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-box button:hover {
+  background: #004d40;
+}
+
+/* CARD CONTAINER */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card h3 {
+  color: #0097a7;
+  margin: 15px 0 5px;
+}
+
+.card p {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.card a {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 8px 15px;
+  background: #00acc1;
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.card a:hover {
+  background: #00838f;
+}
+
+/* DETAIL PAGE */
+.detail-header {
+  background: linear-gradient(135deg, #0097a7, #00acc1);
+  color: white;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.back-btn {
+  display: inline-block;
+  margin-top: 15px;
+  background: white;
+  color: #0097a7;
+  padding: 8px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.detail-container {
+  max-width: 1000px;
+  background: white;
+  margin: 40px auto;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  text-align: center;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.detail-container img {
+  max-width: 90%;
+  border-radius: 15px;
+  margin: 15px 0;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.detail-container iframe {
+  border-radius: 15px;
+  margin-top: 20px;
+  width: 100%;
+  height: 350px;
+}
+
+footer {
+  text-align: center;
+  background: #0097a7;
+  color: white;
+  padding: 20px;
+  font-size: 0.9em;
+  margin-top: 30px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
