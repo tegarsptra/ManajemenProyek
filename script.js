@@ -29,6 +29,13 @@ const wisataData = [
     lokasi: "Gayamsari",
     deskripsi: "Masjid megah dengan payung otomatis seperti di Masjid Nabawi.",
     gambar: "majt.jpg"
+  },
+  {
+    id: 5,
+    nama: "Brown Canyon",
+    lokasi: "Tembalang",
+    deskripsi: "Destinasi alam unik mirip Grand Canyon versi Semarang.",
+    gambar: "browncanyon.jpg"
   }
 ];
 
