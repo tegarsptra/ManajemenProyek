@@ -39,12 +39,13 @@ const wisataData = [
   }
 ];
 
-// Tampilkan kartu di halaman index
+// Render kartu di halaman index.html
 const cardContainer = document.getElementById("cardContainer");
 if (cardContainer) {
   cardContainer.innerHTML = wisataData.map(w => `
     <div class="card">
-      <img src="${w.gambar}" alt="${w.nama}">
+      <img src="${w.gambar}" alt="${w.nama}" 
+           onerror="this.src='https://via.placeholder.com/300x200?text=Gambar+Tidak+Ditemukan'">
       <h3>${w.nama}</h3>
       <p>${w.lokasi}</p>
       <button onclick="showDetail(${w.id})">Lihat Detail</button>
@@ -60,7 +61,8 @@ if (cardContainer) {
     );
     cardContainer.innerHTML = hasil.map(w => `
       <div class="card">
-        <img src="${w.gambar}" alt="${w.nama}">
+        <img src="${w.gambar}" alt="${w.nama}" 
+             onerror="this.src='https://via.placeholder.com/300x200?text=Gambar+Tidak+Ditemukan'">
         <h3>${w.nama}</h3>
         <p>${w.lokasi}</p>
         <button onclick="showDetail(${w.id})">Lihat Detail</button>
@@ -69,7 +71,7 @@ if (cardContainer) {
   });
 }
 
-// Simpan ke localStorage dan arahkan ke detail.html
+// Simpan data wisata ke localStorage lalu buka halaman detail
 function showDetail(id) {
   const wisata = wisataData.find(w => w.id === id);
   localStorage.setItem("selectedWisata", JSON.stringify(wisata));
@@ -90,7 +92,8 @@ if (detailContainer) {
     detailContainer.innerHTML = `
       <div class="detail-content">
         <h2>${wisata.nama}</h2>
-        <img src="${wisata.gambar}" alt="${wisata.nama}" class="detail-img">
+        <img src="${wisata.gambar}" alt="${wisata.nama}" class="detail-img"
+             onerror="this.src='https://via.placeholder.com/500x300?text=Gambar+Tidak+Ditemukan'">
         <p><strong>Lokasi:</strong> ${wisata.lokasi}</p>
         <p>${wisata.deskripsi}</p>
       </div>
