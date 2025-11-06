@@ -1,126 +1,69 @@
-// ===============================
-// 📍 DATA WISATA SEMARANG
-// ===============================
-console.log("✅ Script.js berhasil dimuat!");
-const wisataList = [
+// Data wisata
+const wisataData = [
   {
+    id: 1,
     nama: "Lawang Sewu",
     lokasi: "Pusat Kota Semarang",
-    deskripsi: "Gedung bersejarah peninggalan Belanda yang menjadi ikon Semarang.",
-    gambar: "lawangsewu.jpg",
-    maps: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.068302491584!2d110.40908407499172!3d-7.004576570660853"
+    deskripsi: "Bangunan bersejarah dengan arsitektur kolonial Belanda.",
+    gambar: "img/lawangsewu.jpg"
   },
   {
+    id: 2,
     nama: "Kota Lama",
     lokasi: "Semarang Utara",
-    deskripsi: "Kawasan heritage dengan bangunan kolonial klasik dan spot foto estetik.",
-    gambar: "kotalama.jpg",
-    maps: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.004070795915!2d110.42284517499173!3d-7.010278470664575"
+    deskripsi: "Kawasan heritage dengan bangunan tempo dulu.",
+    gambar: "img/kotalama.jpg"
   },
   {
+    id: 3,
     nama: "Sam Poo Kong",
     lokasi: "Gedung Batu",
-    deskripsi: "Klenteng bersejarah tempat persinggahan Laksamana Cheng Ho.",
-    gambar: "sampookong.jpg",
-    maps: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.3542541129993!2d110.39273437499153!3d-6.981348570645569"
+    deskripsi: "Kelenteng bersejarah tempat persinggahan Laksamana Cheng Ho.",
+    gambar: "img/sampookong.jpg"
   },
   {
+    id: 4,
     nama: "Masjid Agung Jawa Tengah (MAJT)",
     lokasi: "Gayamsari",
-    deskripsi: "Masjid megah dengan arsitektur perpaduan Jawa, Arab, dan modern.",
-    gambar: "majt.jpg",
-    maps: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.959002915978!2d110.45179837499165!3d-7.014002070667501"
-  },
-  {
-    nama: "Brown Canyon",
-    lokasi: "Tembalang",
-    deskripsi: "Tebing bekas galian tanah yang kini jadi spot foto alam keren.",
-    gambar: "browncanyon.jpg",
-    maps: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.523344038483!2d110.46616237499164!3d-7.052570570692589"
+    deskripsi: "Masjid megah dengan payung otomatis seperti di Masjid Nabawi.",
+    gambar: "img/majt.jpg"
   }
 ];
 
-// ===============================
-// 🌆 HALAMAN UTAMA (index.html)
-// ===============================
-const container = document.getElementById("cardContainer");
-
-if (container) {
-  // Fungsi menampilkan daftar wisata
-  function tampilkanWisata(list) {
-    container.innerHTML = "";
-    list.forEach((w, i) => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `
-        <img src="${w.gambar}" alt="${w.nama}">
-        <h3>${w.nama}</h3>
-        <p>${w.lokasi}</p>
-        <button class="detail-btn" data-index="${i}">Lihat Detail</button>
-      `;
-      container.appendChild(card);
-    });
-
-    // Tambahkan event listener setelah elemen dibuat
-    const tombolDetail = document.querySelectorAll(".detail-btn");
-    tombolDetail.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        const index = e.target.getAttribute("data-index");
-        lihatDetail(wisataList[index]);
-      });
-    });
-  }
-
-  // Pencarian
-  document.getElementById("searchInput").addEventListener("input", function () {
-    const keyword = this.value.toLowerCase();
-    const hasil = wisataList.filter(
-      (w) =>
-        w.nama.toLowerCase().includes(keyword) ||
-        w.lokasi.toLowerCase().includes(keyword)
-    );
-    tampilkanWisata(hasil);
-  });
-
-  // Rekomendasi acak
-  function showRandom() {
-    const random = wisataList[Math.floor(Math.random() * wisataList.length)];
-    alert(`🎯 Rekomendasi kamu: ${random.nama}`);
-  }
-  window.showRandom = showRandom;
-
-  // Pindah ke halaman detail
-  function lihatDetail(wisata) {
-    localStorage.setItem("selectedWisata", JSON.stringify(wisata));
-    window.location.href = "detail.html";
-  }
-
-  // Jalankan pertama kali
-  tampilkanWisata(wisataList);
+// Render kartu di index.html
+const cardContainer = document.getElementById("cardContainer");
+if (cardContainer) {
+  cardContainer.innerHTML = wisataData.map(w => `
+    <div class="card">
+      <img src="${w.gambar}" alt="${w.nama}">
+      <h3>${w.nama}</h3>
+      <p>${w.lokasi}</p>
+      <button onclick="showDetail(${w.id})">Lihat Detail</button>
+    </div>
+  `).join('');
 }
 
-// ===============================
-// 🏝️ HALAMAN DETAIL (detail.html)
-// ===============================
-const detailContainer = document.getElementById("detailContainer");
+// Simpan ke localStorage dan arahkan ke detail.html
+function showDetail(id) {
+  const wisata = wisataData.find(w => w.id === id);
+  localStorage.setItem("selectedWisata", JSON.stringify(wisata));
+  window.location.href = "detail.html";
+}
 
+// Tampilkan detail di halaman detail.html
+const detailContainer = document.getElementById("detailContainer");
 if (detailContainer) {
   const wisata = JSON.parse(localStorage.getItem("selectedWisata"));
-
   if (wisata) {
     detailContainer.innerHTML = `
-      <h2>${wisata.nama}</h2>
-      <img src="${wisata.gambar}" alt="${wisata.nama}" class="detail-img">
-      <p>${wisata.deskripsi}</p>
-      <h4>📍 Lokasi: ${wisata.lokasi}</h4>
-      <iframe src="${wisata.maps}" width="100%" height="300" style="border:0;" allowfullscreen></iframe>
+      <div class="detail-content">
+        <h2>${wisata.nama}</h2>
+        <img src="${wisata.gambar}" alt="${wisata.nama}" class="detail-img">
+        <p><strong>Lokasi:</strong> ${wisata.lokasi}</p>
+        <p>${wisata.deskripsi}</p>
+      </div>
     `;
   } else {
-    detailContainer.innerHTML = `
-      <p style="text-align:center; color:red;">
-        ⚠️ Data wisata tidak ditemukan.<br>
-        Silakan kembali ke <a href="index.html">halaman utama</a>.
-      </p>
-    `;
+    detailContainer.innerHTML = `<p>Data tidak ditemukan. Silakan kembali ke <a href="index.html">beranda</a>.</p>`;
   }
 }
