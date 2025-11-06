@@ -94,19 +94,26 @@ body {
   margin-bottom: 10px;
 }
 
+/* TOMBOL LIHAT DETAIL */
 .card a {
   display: inline-block;
   margin-bottom: 20px;
-  padding: 8px 15px;
-  background: #00acc1;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #00acc1, #00838f);
   color: white;
-  border-radius: 10px;
+  border-radius: 25px;
   text-decoration: none;
-  transition: 0.3s;
+  font-weight: 600;
+  font-size: 0.95em;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0, 150, 136, 0.25);
+  transition: all 0.3s ease;
 }
 
 .card a:hover {
-  background: #00838f;
+  background: linear-gradient(135deg, #00838f, #006064);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 18px rgba(0, 96, 100, 0.35);
 }
 
 /* DETAIL PAGE */
