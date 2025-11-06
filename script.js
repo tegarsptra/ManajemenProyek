@@ -53,7 +53,7 @@ if (cardContainer) {
            onerror="this.src='https://via.placeholder.com/300x200?text=Gambar+Tidak+Ditemukan'">
       <h3>${w.nama}</h3>
       <p>${w.lokasi}</p>
-      <button onclick="showDetail(${w.id})">Lihat Detail</button>
+      <a href="#" class="detail-btn" onclick="showDetail(${w.id})">Lihat Detail</a>
     </div>
   `).join('');
 
