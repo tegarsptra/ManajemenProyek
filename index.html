@@ -3,28 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🌇 Wisata Kota Semarang</title>
+  <title>🌆 Wisata Kota Semarang</title>
   <link rel="stylesheet" href="assets/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <div class="hero">
-      <h1>🌆 Jelajahi Keindahan <span>Semarang</span></h1>
-      <p>Temukan destinasi wisata terbaik dari Kota Atlas ✨</p>
-      <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="🔍 Cari tempat wisata..." />
-        <button onclick="showRandom()">🎲 Rekomendasi Acak</button>
-      </div>
+  <header class="hero">
+    <h1>🌴 Jelajahi Keindahan Semarang</h1>
+    <p>Temukan destinasi terbaik, dari sejarah hingga panorama alam menawan!</p>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Cari destinasi...">
+      <button onclick="showRandom()">🎲 Rekomendasi</button>
     </div>
   </header>
 
-  <main id="cardContainer">
-    <!-- Kartu wisata akan dimunculkan lewat script.js -->
+  <main>
+    <section id="cardContainer" class="card-container"></section>
   </main>
 
   <footer>
-    <p>© 2025 Website Wisata Semarang | Kelompok Tegar</p>
+    <p>© 2025 Wisata Kota Semarang</p>
   </footer>
 
   <script src="assets/script.js"></script>
