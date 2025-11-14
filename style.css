@@ -1,200 +1,174 @@
-/* ---------------------------------------------------
-   GLOBAL STYLE
---------------------------------------------------- */
-* {
+body {
+  font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  background: #f7f7f7;
+  background: #f7fafc;
   color: #333;
-  line-height: 1.6;
 }
 
-h1, h2 {
-  font-family: 'Playfair Display', serif;
-}
-
-/* ---------------------------------------------------
-   HERO SECTION (INDEX & DETAIL)
---------------------------------------------------- */
 .hero {
-  height: 60vh;
-  background: url('assets/semarang.jpg') center/cover no-repeat;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   text-align: center;
-  padding: 0 20px;
+  background: linear-gradient(135deg, #0097a7, #00acc1);
   color: white;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.45);
-}
-
-.hero h1,
-.hero p {
-  position: relative;
-  z-index: 2;
+  padding: 60px 20px;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
 }
 
 .hero h1 {
-  font-size: 2.6rem;
-  margin-bottom: 10px;
+  font-family: "Playfair Display", serif;
+  font-size: 2.5em;
 }
 
 .hero p {
-  font-size: 1.1rem;
-  max-width: 600px;
-  opacity: 0.9;
+  margin-top: 10px;
+  font-size: 1.1em;
 }
 
-/* ---------------------------------------------------
-   SEARCH BOX
---------------------------------------------------- */
 .search-box {
-  position: relative;
   margin-top: 20px;
-  z-index: 2;
-  display: flex;
-  gap: 10px;
 }
 
 .search-box input {
-  width: 250px;
   padding: 10px 15px;
-  border-radius: 6px;
   border: none;
-  outline: none;
-  font-size: 1rem;
+  border-radius: 10px;
+  width: 220px;
 }
 
 .search-box button {
   padding: 10px 15px;
-  background: #f1c40f;
+  margin-left: 10px;
   border: none;
+  border-radius: 10px;
+  background: #006064;
+  color: white;
   cursor: pointer;
-  font-weight: 600;
-  border-radius: 6px;
-  transition: 0.2s;
+  transition: 0.3s;
 }
 
 .search-box button:hover {
-  background: #d4ac0d;
+  background: #004d40;
 }
 
-/* ---------------------------------------------------
-   CARD GRID (INDEX)
---------------------------------------------------- */
 .card-container {
-  max-width: 1000px;
-  margin: 30px auto;
-  padding: 20px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
+  gap: 25px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .card {
   background: white;
-  border-radius: 10px;
+  border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
-  transition: transform .2s, box-shadow .2s;
-  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0px 6px 18px rgba(0,0,0,0.15);
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .card img {
   width: 100%;
-  height: 160px;
+  height: 180px;
   object-fit: cover;
 }
 
-.card-content {
-  padding: 15px;
+.card h3 {
+  color: #0097a7;
+  margin: 15px 0 5px;
 }
 
-.card-content h3 {
-  font-size: 1.2rem;
-  margin-bottom: 6px;
-}
-
-.card-content p {
-  font-size: .9rem;
-  opacity: .7;
-}
-
-/* ---------------------------------------------------
-   DETAIL PAGE
---------------------------------------------------- */
-.detail-hero {
-  height: 35vh;
-}
-
-.back-btn {
-  position: relative;
-  z-index: 2;
-  margin-top: 10px;
-  padding: 8px 16px;
-  background: #ffffff;
-  color: #333;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.2s;
-}
-
-.back-btn:hover {
-  background: #f1c40f;
-  color: black;
-}
-
-.detail-container {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 20px;
-}
-
-.detail-container img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
-.detail-container h2 {
+.card p {
+  color: #666;
   margin-bottom: 10px;
 }
 
-.detail-container p {
-  opacity: 0.9;
-  font-size: 1rem;
+.detail-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #00acc1, #0097a7);
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 25px;
+  box-shadow: 0 4px 12px rgba(0, 150, 136, 0.25);
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
 }
 
-/* ---------------------------------------------------
-   FOOTER
---------------------------------------------------- */
+.detail-btn:hover {
+  background: linear-gradient(135deg, #00838f, #006064);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 18px rgba(0, 96, 100, 0.35);
+}
+
+.detail-header {
+  background: linear-gradient(135deg, #0097a7, #00acc1);
+  color: white;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.back-btn {
+  display: inline-block;
+  margin-top: 15px;
+  background: white;
+  color: #0097a7;
+  padding: 8px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.detail-container {
+  max-width: 1000px;
+  background: white;
+  margin: 40px auto;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  text-align: center;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.detail-container img {
+  max-width: 90%;
+  border-radius: 15px;
+  margin: 15px 0;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.detail-container iframe {
+  border-radius: 15px;
+  margin-top: 20px;
+  width: 100%;
+  height: 350px;
+}
+
+.map-container {
+  margin-top: 20px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
 footer {
   text-align: center;
-  padding: 20px;
-  background: #222;
+  background: #0097a7;
   color: white;
-  margin-top: 40px;
-  font-size: 0.9rem;
+  padding: 20px;
+  font-size: 0.9em;
+  margin-top: 30px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
