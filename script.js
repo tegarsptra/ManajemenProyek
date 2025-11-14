@@ -1,6 +1,8 @@
 console.log("✅ script.js berhasil dimuat!");
 
-// Data wisata
+// ===========================
+// DATA WISATA
+// ===========================
 const wisataData = [
   {
     id: 1,
@@ -44,70 +46,89 @@ const wisataData = [
   }
 ];
 
-// Render kartu di halaman index.html
+// ===========================
+// RENDER KARTU INDEX
+// ===========================
 const cardContainer = document.getElementById("cardContainer");
-if (cardContainer) {
-  cardContainer.innerHTML = wisataData.map(w => `
+
+// Fungsi buat template card
+function createCard(w) {
+  return `
     <div class="card">
       <img src="${w.gambar}" alt="${w.nama}" 
-           onerror="this.src='https://via.placeholder.com/300x200?text=Gambar+Tidak+Ditemukan'">
+        onerror="this.src='https://via.placeholder.com/300x200?text=Gambar+Tidak+Ditemukan'">
       <h3>${w.nama}</h3>
       <p>${w.lokasi}</p>
-      <a href="#" class="detail-btn" onclick="showDetail(${w.id})">Lihat Detail</a>
+      <button class="detail-btn" onclick="showDetail(${w.id})">Lihat Detail</button>
     </div>
-  `).join('');
-
-  // Fitur pencarian
-  document.getElementById("searchInput").addEventListener("input", e => {
-    const keyword = e.target.value.toLowerCase();
-    const hasil = wisataData.filter(w => 
-      w.nama.toLowerCase().includes(keyword) || 
-      w.lokasi.toLowerCase().includes(keyword)
-    );
-    cardContainer.innerHTML = hasil.map(w => `
-      <div class="card">
-        <img src="${w.gambar}" alt="${w.nama}" 
-             onerror="this.src='https://via.placeholder.com/300x200?text=Gambar+Tidak+Ditemukan'">
-        <h3>${w.nama}</h3>
-        <p>${w.lokasi}</p>
-        <button onclick="showDetail(${w.id})">Lihat Detail</button>
-      </div>
-    `).join('');
-  });
+  `;
 }
 
-// Simpan data wisata ke localStorage lalu buka halaman detail
+if (cardContainer) {
+  cardContainer.innerHTML = wisataData.map(createCard).join('');
+
+  // Fitur pencarian
+  const searchInput = document.getElementById("searchInput");
+
+  if (searchInput) {
+    searchInput.addEventListener("input", e => {
+      const keyword = e.target.value.toLowerCase();
+
+      const hasil = wisataData.filter(w =>
+        w.nama.toLowerCase().includes(keyword) ||
+        w.lokasi.toLowerCase().includes(keyword)
+      );
+
+      cardContainer.innerHTML = hasil.map(createCard).join('');
+    });
+  }
+}
+
+// ===========================
+// SIMPAN DAN TAMPILKAN DETAIL
+// ===========================
 function showDetail(id) {
   const wisata = wisataData.find(w => w.id === id);
   localStorage.setItem("selectedWisata", JSON.stringify(wisata));
   window.location.href = "detail.html";
 }
 
-// Rekomendasi acak
+// Rekomendasi random
 function showRandom() {
   const random = wisataData[Math.floor(Math.random() * wisataData.length)];
-  alert(`🎯 Rekomendasi kamu: ${random.nama}`);
+  alert(🎯 Rekomendasi kamu: ${random.nama});
 }
 
-// Tampilkan detail di halaman detail.html
+// ===========================
+// HALAMAN DETAIL
+// ===========================
 const detailContainer = document.getElementById("detailContainer");
+
 if (detailContainer) {
   const wisata = JSON.parse(localStorage.getItem("selectedWisata"));
+
   if (wisata) {
     detailContainer.innerHTML = `
       <div class="detail-content">
         <h2>${wisata.nama}</h2>
+
         <img src="${wisata.gambar}" alt="${wisata.nama}" class="detail-img"
-             onerror="this.src='https://via.placeholder.com/500x300?text=Gambar+Tidak+Ditemukan'">
+          onerror="this.src='https://via.placeholder.com/500x300?text=Gambar+Tidak+Ditemukan'">
+
         <p><strong>Lokasi:</strong> ${wisata.lokasi}</p>
         <p>${wisata.deskripsi}</p>
+
         <h3>📍 Lokasi di Peta:</h3>
         <div class="map-container">
-          <iframe src="${wisata.maps}" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          <iframe src="${wisata.maps}" width="100%" height="300"
+            style="border:0;" allowfullscreen loading="lazy">
+          </iframe>
         </div>
       </div>
     `;
   } else {
-    detailContainer.innerHTML = `<p>Data tidak ditemukan. Silakan kembali ke <a href="index.html">beranda</a>.</p>`;
+    detailContainer.innerHTML = `
+      <p>Data tidak ditemukan. Silakan kembali ke <a href="index.html">beranda</a>.</p>
+    `;
   }
 }
