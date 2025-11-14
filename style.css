@@ -1,5 +1,5 @@
 /* ================================
-   🌈 GLOBAL STYLE
+   GLOBAL STYLE
 ================================ */
 body {
   font-family: "Poppins", sans-serif;
@@ -11,7 +11,7 @@ body {
 }
 
 /* ================================
-   🔥 HERO SECTION
+   HERO SECTION
 ================================ */
 .hero {
   text-align: center;
@@ -36,7 +36,7 @@ body {
 }
 
 /* ================================
-   🔍 SEARCH BOX
+   SEARCH BOX
 ================================ */
 .search-box {
   margin-top: 25px;
@@ -78,7 +78,7 @@ body {
 }
 
 /* ================================
-   🃏 CARD / LIST WISATA
+   CARD / LIST WISATA
 ================================ */
 .card-container {
   display: grid;
@@ -123,7 +123,7 @@ body {
 }
 
 /* ================================
-   🔘 TOMBOL DETAIL
+   TOMBOL DETAIL
 ================================ */
 .detail-btn {
   padding: 12px 25px;
@@ -145,7 +145,7 @@ body {
 }
 
 /* ================================
-   🏞 DETAIL PAGE
+   DETAIL PAGE
 ================================ */
 .detail-header {
   background: linear-gradient(135deg, #00838f, #00acc1);
@@ -193,7 +193,7 @@ body {
 }
 
 /* ================================
-   🌍 MAP CONTAINER
+   MAP CONTAINER
 ================================ */
 .map-container {
   margin-top: 20px;
@@ -203,7 +203,7 @@ body {
 }
 
 /* ================================
-   🦶 FOOTER
+   FOOTER
 ================================ */
 footer {
   text-align: center;
@@ -216,7 +216,7 @@ footer {
 }
 
 /* ================================
-   ✨ ANIMATIONS
+   ANIMATIONS
 ================================ */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(25px); }
