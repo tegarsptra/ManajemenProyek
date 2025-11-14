@@ -3,29 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🌴 Wisata Kota Semarang</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-</head>
-<body>
-  <header class="hero">
-    <h1>🌴 Jelajahi Keindahan Semarang</h1>
-    <p>Temukan destinasi terbaik, dari sejarah hingga panorama alam menawan!</p>
+  <title>Wisata Kota Semarang</title>
 
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Cari destinasi...">
-      <button onclick="showRandom()">🎲 Rekomendasi</button>
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+  <!-- STYLE -->
+  <link rel="stylesheet" href="style.css?v=2">
+</head>
+
+<body>
+
+  <!-- ======================
+       HERO SECTION
+  ======================= -->
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Jelajahi Keindahan Semarang</h1>
+      <p>
+        Temukan destinasi terbaik di Kota Semarang, mulai dari tempat bersejarah,
+        wisata budaya, hingga panorama alam yang menawan.
+      </p>
+
+      <!-- SEARCH BAR -->
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Cari destinasi...">
+        <button onclick="showRandom()">Rekomendasi</button>
+      </div>
     </div>
   </header>
 
+  <!-- ======================
+       CARD CONTAINER
+  ======================= -->
   <main>
-    <section id="cardContainer" class="card-container"></section>
+    <section id="cardContainer" class="card-container">
+      <!-- Card akan ditampilkan melalui script -->
+    </section>
   </main>
 
+  <!-- ======================
+       FOOTER
+  ======================= -->
   <footer>
-    <p>© 2025 Wisata Kota Semarang</p>
+    <p>© 2025 Wisata Kota Semarang — Semua Hak Dilindungi</p>
   </footer>
 
+  <!-- SCRIPT -->
   <script src="script.js"></script>
+
 </body>
 </html>
